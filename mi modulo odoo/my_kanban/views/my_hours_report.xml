@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+ <template id = "report_task_hours" >
+ <t t-call = "web.html_container" >
+ <t t-foreach = "docs" t-as = "o" >
+ <t t-call = "web.external_layout" >
+ <div class = "page" >
+
+<style>
+.padre {
+  background: #ccc;
+  height: 100%;
+  /*IMPORTANTE*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding:30px;
+}
+
+.hijo {
+  margin-left: 25%;
+  background: #fff;
+  width: 50%;
+  padding:20px;
+}
+</style>
+<div class="padre">
+<div class="hijo">
+    <h1> Pedido </h1>
+    <h4> Nombre Socio: <span t-field = "o.nombreSocio" /> </h4>
+    <h4> Dia del pedido: <span t-field = "o.dia" /> </h4>
+    <h4> Tipo de Pedido: <span t-field = "o.tipoPedido" /> </h4>
+    <hr/>
+
+    <h4> Dia de entrega:  <span t-field = "o.date_deadline" /> </h4>
+    <h4> Lugar: <span t-field = "o.lugar" /> </h4>
+    <h4> Hora inicio reparto: <span t-field = "o.horaInicio" /> </h4>
+    <h4> Hora de entrega: <span t-field = "o.horaFin" /> </h4>
+</div>
+</div>
+
+ </div>
+ </t>
+ </t>
+ </t>
+ </template>
+</odoo>

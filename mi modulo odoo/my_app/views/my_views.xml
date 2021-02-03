@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <odoo>
+        <!-- Action to open To-do Task list -->
+        <act_window
+            id="action_my_task"
+            name="My Task"
+            res_model="my.task"
+            view_mode="tree,form"
+        />
+        <!-- top level menu: no parent -->
+        <menuitem
+            id="main_menu_my_task"
+            name="My Application"
+        />
+        <!-- A first level in the left side menu is needed 
+before using action= attribute -->
+        <menuitem
+            id="l1_menu_my_task"
+            name="My Tasks"
+            parent="main_menu_my_task"
+        />
+        <!-- Menu item to open To-do Task list -->
+        <menuitem
+            id="menu_my_task"
+            name="My Tasks"
+            parent="l1_menu_my_task"
+            action="action_my_task"
+        />
+
+<!-- Vista de listado -->
+<record id="view_tree_my_task" model="ir.ui.view">
+    <field name="name">My Task Tree</field>
+    <field name="model">my.task</field>
+    <field name="arch" type="xml">
+        <tree>
+            <field name="nombreSocio"/>
+            <field name="lugar"/>
+            <field name="dia"/>
+            <field name="horaInicio"/>
+            <field name="horaFin"/>
+            <field name="tipoPedido"/>
+        </tree>
+    </field>
+</record>
+<!-- Vista de búsqueda -->
+<record id="view_filter_my_task" model="ir.ui.view">
+    <field name="name">My Task Filter</field>
+    <field name="model">my.task</field>
+    <field name="arch" type="xml">
+        <search>
+            <field name="name"/>
+            <filter name="done" string="Hechas" domain="[('is_done','!=',False)]"/>
+        </search>
+    </field>
+</record>
+<!-- Vista de Formulario -->
+<record id="view_form_my_task" model="ir.ui.view">
+    <field name="name">My Task Form</field>
+    <field name="model">my.task</field>
+     <field name="arch" type="xml">
+        <form>
+            <header>
+                <button name="do_marcar" type="object" string="Marcar hechas" class="oe_highlight" />
+                <button name="do_limpiar" type="object" string="Limpiar hechas" />
+            </header>
+            <sheet>
+                <group name="group_top">
+                    <group name="group_left">
+                        <field name="nombreSocio"/>
+                        <field name="lugar"/>
+                        <field name="dia"/>
+                        <field name="horaInicio"/>
+                        <field name="horaFin"/>
+                        <field name="tipoPedido"/>
+                    </group>
+                    <group name="group_right">
+                        <field name="is_done"/>
+                        <field name="active" readonly="1"/>
+                    </group>
+                </group>
+            </sheet>
+        </form>
+    </field>
+</record>
+</odoo>

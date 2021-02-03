@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<act_window id="action_my_colab_task" name="My Task Colaborative" res_model="my.task" view_mode="tree,form,graph,pivot" />
+	<!-- Menu item to open To-do Task list colaborativa -->
+	<menuitem id="menu_my_colab_task" name="My Tasks Colaborative" parent="my_app.l1_menu_my_task" sequence="30" action="action_my_colab_task" />
+	<record id="view_form_my_task_inherited" model="ir.ui.view">
+		<field name="name">
+			My Task form – Collaborative
+		</field>
+		<field name="model">my.task</field>
+		<field name="inherit_id" ref="my_app.view_form_my_task" />
+		<field name="arch" type="xml">
+			<field name="nombreSocio" position="after">
+				<field name="user_id" />
+			</field>
+			<field name="is_done" position="before">
+				<field name="date_deadline" />
+			</field>
+			<field name="nombreSocio" position="attributes">
+				
+				<attribute name="string">
+					Mi socio es …
+				</attribute>
+			</field>
+			<field name="active" position="attributes">
+				<attribute name="invisible">
+					1
+				</attribute>
+			</field>
+			<sheet position="after">
+				<div class="oe_chatter">
+					<field name="message_follower_ids" widget="mail_followers" />
+					<field name="message_ids" widget="mail_thread" />
+				</div>
+			</sheet>
+		</field>
+	</record>
+	<record id="view_tree_my_task_inherited" model="ir.ui.view">
+		<field name="name">
+			My Task tree – User extension
+		</field>
+		<field name="model">my.task</field>
+		<field name="inherit_id" ref="my_app.view_tree_my_task" />
+		<field name="arch" type="xml">
+			<field name="nombreSocio" position="after">
+				<field name="user_id" />
+			</field>
+			<field name="user_id" position="after">
+				<field name="date_deadline" />
+			</field>
+		</field>
+	</record>
+	<record id="view_filter_my_task_inherited" model="ir.ui.view">
+		<field name="name">
+			My Filter
+		</field>
+		<field name="model">my.task</field>
+		<field name="inherit_id" ref="my_app.view_filter_my_task" />
+		<field name="arch" type="xml">
+			<field name="name" position="after">
+				<field name="user_id" />
+				<filter name="filter_my_tasks" string="Mis tareas" domain="[('user_id','in',[uid,False])]" />
+				<filter name="filter_not_assigned" string="Sin asignar" domain="[('user_id','=',False)]" />
+			</field>
+		</field>
+	</record>
+
+	 <record id="view_graph_my_task" model="ir.ui.view">
+	<field name="name">Grafico</field>
+	<field name="model">my.task</field>
+	<field name="arch" type="xml">
+	<graph>
+		<field name="user_id" />
+		<field name="tipoPedido" type="measure" />
+		</graph>
+	</field>
+	</record>
+
+	<record id="view_pivot_my_task" model="ir.ui.view">
+	<field name="name">Pivot</field>
+	<field name="model">my.task</field>
+	<field name="arch" type="xml">
+		<pivot>
+		<field name="user_id" type="col"/>
+		<field name="date_deadline" type="row"/>
+		</pivot>
+	</field>
+	</record>
+</odoo>

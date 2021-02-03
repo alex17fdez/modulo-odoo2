@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+ <report
+ id="report_my_hours"
+ model="my.task"
+ string="Imprimir Pedido"
+ report_type="qweb-pdf"
+ name="my_kanban.report_task_hours"
+ attachment_use="False"
+ file="my_kanban.report_task_hours" />
+</odoo>
